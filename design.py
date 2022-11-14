@@ -1,14 +1,14 @@
 """01_03_showbase.py"""
 from direct.showbase.ShowBase import ShowBase
 from panda3d.core import *
-
+from panda3d.core import Quat
 
 class App(ShowBase):
     # コンストラクタ
     def __init__(self):
         # ShowBaseを継承する
         ShowBase.__init__(self)
-
+        self.q = 0.2
         self.x = 5
         self.y = 0
         self.z = 10
@@ -35,6 +35,8 @@ class App(ShowBase):
         self.accept( "d", self.d_key )    
         self.accept( "e", self.e_key )    
         self.accept( "f", self.f_key )    
+        self.accept( "g", self.g_key )    
+        self.accept( "h", self.h_key )    
  
     def a_key(self): 
         self.x += 1
@@ -54,6 +56,12 @@ class App(ShowBase):
     def f_key(self): 
         self.z -= 1
         self.camera.setPos(self.x, self.y, self.z)
+    def g_key(self): 
+        self.q += 0.2
+        self.cube.setQuat(Quat( 0, 1, 1, self.q ) )
+    def h_key(self): 
+        self.q -= 0.2
+        self.cube.setQuat(Quat( 0, 1, 1, self.q ) )
 
 app = App()
 app.run()
