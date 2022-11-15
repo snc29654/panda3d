@@ -15,12 +15,26 @@ class MoveCube(ShowBase):
         self.x=0
         self.y=20
         self.z=1
+        self.state=0
         self.taskMgr.add(self.MoveTest1, "MoveTest")
 
     def MoveTest1(self, task):
-        self.x+=0.2
-        self.y+=1
-        self.z+=0.2
+        
+        if(self.state==0):
+            self.x+=0.2
+            self.y+=1
+            self.z+=0.2
+            if(self.x>5):
+                self.state=1
+        if(self.state==1):
+            self.x-=0.2
+            self.y-=1
+            self.z-=0.2
+            if(self.x<0.1):
+                self.state=0
+
+
+
         self.cube.setPos(self.x, self.y, self.z)
         return Task.cont
   
